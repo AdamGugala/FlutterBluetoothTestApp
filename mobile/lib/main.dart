@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => BluetoothBloc(),
+      create: (_) => BluetoothConnectionBloc(),
       child: AppView(),
     );
   }
@@ -36,16 +36,8 @@ class _AppViewState extends State<AppView> {
       initialRoute: '/',
       debugShowCheckedModeBanner: false,
       builder: (context, child) {
-        return BlocListener<BluetoothBloc, BluetoothState>(
-          listener: (listenerContext, state) {
-            if (state is BluetoothDisconnected) {
-              print('Bluetooth disconnected');
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text("Bluetooth disconnected"),
-                duration: Duration(seconds: 10),
-              ));
-            }
-          },
+        return BlocListener<BluetoothConnectionBloc, BluetoothConnectionState>(
+          listener: (listenerContext, state) {},
           child: child,
         );
       },
